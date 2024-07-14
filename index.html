@@ -25,21 +25,22 @@
       };
 
       fetch("https://y30z07fx9l.execute-api.us-west-2.amazonaws.com/Semestral", requestOptions)
-        .then(response => response.text())
-        .then(result => alert(JSON.parse(result).reservationId))
+        .then(response => response.json())
+        .then(result => alert(`Reserva creada con ID: ${result.reservationId}`))
         .catch(error => console.log("error", error));
     };
 
     function handleSubmit(event) {
       event.preventDefault(); // Prevenir el envío del formulario
       var details = document.querySelector('input[name="details"]').value;
+      var reservationDate = document.querySelector('input[name="reservationDate"]').value;
       var reservationTime = document.querySelector('input[name="reservationTime"]').value;
       var reservationType = document.querySelector('select[name="reservationType"]').value;
 
-      // Formatear la fecha para incluir la hora en formato ISO
-      reservationTime += "T00:00:00";
+      // Formatear la fecha y la hora para incluir en el formato ISO
+      var reservationDateTime = reservationDate + 'T' + reservationTime + ':00';
 
-      callAPI(details, reservationTime, reservationType);
+      callAPI(details, reservationDateTime, reservationType);
     }
   </script>
 </head>
@@ -52,7 +53,10 @@
     <input type="text" name="details" />
     <br />
     <label>Fecha de reservación:</label>
-    <input type="date" name="reservationTime" />
+    <input type="date" name="reservationDate" />
+    <br />
+    <label>Hora de reservación:</label>
+    <input type="time" name="reservationTime" />
     <br />
     <label>Tipo de reserva:</label>
     <select name="reservationType">
