@@ -1,80 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Web site created using create-react-app" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reservaciones App</title>
-  <script>
-    var callAPI = (details, reservationDate, reservationTime, reservationType) => {
-      console.log("Sending data:", details, reservationTime, reservationType);
-
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-
-      // Formatear la fecha y la hora para incluir en el formato ISO
-      var reservationDateTime = reservationDate + 'T' + reservationTime + ':00';
-
-      var raw = JSON.stringify({
-        "details": details,
-        "reservationTime": reservationDateTime,
-        "reservationType": reservationType
-      });
-
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-      };
-
-      fetch("https://y30z07fx9l.execute-api.us-west-2.amazonaws.com/Semestral", requestOptions)
-        .then(response => response.json())
-        .then(result => {
-          console.log("API response:", result);
-          alert(`Reserva creada con ID: ${result.reservation_id}`);
-        })
-        .catch(error => console.log("error", error));
-    };
-
-    function handleSubmit(event) {
-    event.preventDefault();
-    var details = document.querySelector('input[id="details"]').value;
-    var reservationDate = document.querySelector('input[id="reservationDate"]').value;
-    var reservationTime = document.querySelector('input[id="reservationTime"]').value;
-    var reservationType = document.querySelector('select[id="reservationType"]').value;
-    var reservationDateTime = reservationDate + 'T' + reservationTime + ':00';
-    
-    console.log("Details:", details);
-    console.log("Reservation DateTime:", reservationDateTime);
-    console.log("Reservation Type:", reservationType);
-    }
-  </script>
 </head>
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <h2>Formulario de reservación</h2>
-  <form>
-    <label>Detalles:</label>
-    <input type="text" id="details" />
-    <br />
-    <label>Fecha de reservación:</label>
-    <input type="date" id="reservationDate" />
-    <br />
-    <label>Hora de reservación:</label>
-    <input type="time" id="reservationTime" />
-    <br />
-    <label>Tipo de reserva:</label>
-    <select id="reservationType">
-      <option value="medical">Consulta médica</option>
-      <option value="dental">Consulta dental</option>
-      <!-- Agrega más opciones según sea necesario -->
-    </select>
-    <br />
-    <button type="button" onclick="callAPI(document.getElementById('details').value,document.getElementById('reservationDate').value,document.getElementById('reservationTime').value,document.getElementById('reservationType').value)">Enviar</button>
-    <br />
-  </form>
+  <h1>Reservaciones App</h1>
+  <nav>
+    <ul>
+      <li><a href="create_reservation.html">Crear Reservación</a></li>
+      <li><a href="view_reservations.html">Ver Reservaciones</a></li>
+      <li><a href="update_reservation.html">Actualizar Reservación</a></li>
+      <li><a href="delete_reservation.html">Borrar Reservación</a></li>
+    </ul>
+  </nav>
 </body>
 </html>
