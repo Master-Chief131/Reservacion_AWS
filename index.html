@@ -8,6 +8,8 @@
   <title>Reservaciones App</title>
   <script>
     var callAPI = (details, reservationTime, reservationType) => {
+      console.log("Sending data:", details, reservationTime, reservationType);
+      
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
@@ -26,7 +28,10 @@
 
       fetch("https://y30z07fx9l.execute-api.us-west-2.amazonaws.com/Semestral", requestOptions)
         .then(response => response.json())
-        .then(result => alert(`Reserva creada con ID: ${result.reservationId}`))
+        .then(result => {
+          console.log("API response:", result);
+          alert(`Reserva creada con ID: ${result.reservationId}`);
+        })
         .catch(error => console.log("error", error));
     };
 
