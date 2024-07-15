@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Borrar Reservación</title>
+  <script>
+    var deleteReservation = (reservationId) => {
+      console.log("Deleting reservation:", reservationId);
+
+      var requestOptions = {
+        method: 'DELETE',
+        redirect: 'follow'
+      };
+
+      fetch(`https://y30z07fx9l.execute-api.us-west-2.amazonaws.com/Semestral`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          console.log("API response:", result);
+          alert(`Reserva borrada: ${result.message}`);
+        })
+        .catch(error => console.log("error", error));
+    };
+
+    function handleSubmit(event) {
+      event.preventDefault();
+      var reservationId = document.getElementById('reservationId').value;
+      deleteReservation(reservationId);
+    }
+  </script>
+</head>
+<body>
+  <h2>Borrar Reservación</h2>
+  <form onsubmit="handleSubmit(event)">
+    <label>ID de Reservación:</label>
+    <input type="text" id="reservationId" />
+    <br />
+    <button type="submit">Borrar</button>
+  </form>
+  <br />
+  <a href="index.html">Volver al inicio</a>
+</body>
+</html>

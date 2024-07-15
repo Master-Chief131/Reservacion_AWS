@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ver Reservaciones</title>
+  <script>
+    var fetchReservations = () => {
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+
+      fetch("https://y30z07fx9l.execute-api.us-west-2.amazonaws.com/Semestral", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          console.log("API response:", result);
+          var reservationList = document.getElementById('reservationList');
+          reservationList.innerHTML = '';
+          result.forEach(reservation => {
+            var li = document.createElement('li');
+            li.innerText = `ID: ${reservation.reservationId}, Detalles: ${reservation.details}, Fecha y Hora: ${reservation.reservationTime}, Tipo: ${reservation.reservationType}`;
+            reservationList.appendChild(li);
+          });
+        })
+        .catch(error => console.log("error", error));
+    };
+
+    window.onload = fetchReservations;
+  </script>
+</head>
+<body>
+  <h2>Lista de Reservaciones</h2>
+  <ul id="reservationList"></ul>
+  <br />
+  <a href="index.html">Volver al inicio</a>
+</body>
+</html>

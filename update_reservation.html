@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualizar Reservación</title>
+  <script>
+    var updateReservation = (reservationId, details, reservationDate, reservationTime, reservationType) => {
+      console.log("Updating reservation:", reservationId, details, reservationDate, reservationTime, reservationType);
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var reservationDateTime = reservationDate + 'T' + reservationTime + ':00';
+
+      var raw = JSON.stringify({
+        "details": details,
+        "reservationTime": reservationDateTime,
+        "reservationType": reservationType
+      });
+
+      var requestOptions = {
+        method: 'PUT',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      fetch(`https://y30z07fx9l.execute-api.us-west-2.amazonaws.com/Semestral`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          console.log("API response:", result);
+          alert(`Reserva actualizada: ${result.message}`);
+        })
+        .catch(error => console.log("error", error));
+    };
+
+    function handleSubmit(event) {
+      event.preventDefault();
+      var reservationId = document.getElementById('reservationId').value;
+      var details = document.getElementById('details').value;
+      var reservationDate = document.getElementById('reservationDate').value;
+      var reservationTime = document.getElementById('reservationTime').value;
+      var reservationType = document.querySelector('select[name="reservationType"]').value;
+
+      updateReservation(reservationId, details, reservationDate, reservationTime, reservationType);
+    }
+  </script>
+</head>
+<body>
+  <h2>Actualizar Reservación</h2>
+  <form onsubmit="handleSubmit(event)">
+    <label>ID de Reservación:</label>
+    <input type="text" id="reservationId" />
+    <br />
+    <label>Detalles:</label>
+    <input type="text" id="details" />
+    <br />
+    <label>Fecha de reservación:</label>
+    <input type="date" id="reservationDate" />
+    <br />
+    <label>Hora de reservación:</label>
+    <input type="time" id="reservationTime" />
+    <br />
+    <label>Tipo de reserva:</label>
+    <select name="reservationType">
+      <option value="medical">Consulta médica</option>
+      <option value="dental">Consulta dental</option>
+    </select>
+    <br />
+    <button type="submit">Actualizar</button>
+  </form>
+  <br />
+  <a href="index.html">Volver al inicio</a>
+</body>
+</html>
