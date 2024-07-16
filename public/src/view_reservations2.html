@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ver Reservaciones</title>
   <link rel="stylesheet" href="styles/reservation.css">
-  <link rel="stylesheet" href="styles/view_reservatons.css">
+  <link rel="stylesheet" href="styles/view_reservations2.css">
   <script>
     var fetchReservations = () => {
       console.log("Fetching reservations...");
@@ -34,13 +34,13 @@
           var reservationTable = document.getElementById('reservationTable');
           reservations.forEach(reservation => {
             var row = reservationTable.insertRow();
-            row.innerHTML = `<td>${reservation.reservationId}</td><td>${reservation.details}</td><td>${reservation.reservationTime}</td><td>${reservation.reservationType}</td>`;
+            row.innerHTML = `<td>${reservation.reservationId}</td><td>${reservation.userId}</td><td>${reservation.details}</td><td>${reservation.reservationTime}</td><td>${reservation.reservationType}</td>`;
           });
         })
         .catch(error => {
           console.log("Fetch error:", error);
           var reservationTable = document.getElementById('reservationTable');
-          reservationTable.innerHTML = '<tr><td colspan="4">Error al cargar las reservaciones.</td></tr>';
+          reservationTable.innerHTML = '<tr><td colspan="5">Error al cargar las reservaciones.</td></tr>';
         });
     };
 
@@ -53,6 +53,7 @@
     <thead>
       <tr>
         <th>ID Reservacion</th>
+        <th>User ID</th>
         <th>Detalles</th>
         <th>Fecha y Hora</th>
         <th>Tipo</th>
@@ -63,6 +64,6 @@
     </tbody>
   </table>
   <br />
-  <a href="/index.html">Volver al inicio</a>
+  <a href="/public/index2.html">Volver al inicio</a>
 </body>
 </html>
