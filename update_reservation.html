@@ -49,7 +49,7 @@
 </head>
 <body>
   <h2>Actualizar Reservación</h2>
-  <form onsubmit="handleSubmit(event)">
+  <form>
     <label>ID de Reservación:</label>
     <input type="text" id="reservationId" />
     <br />
@@ -63,12 +63,12 @@
     <input type="time" id="reservationTime" />
     <br />
     <label>Tipo de reserva:</label>
-    <select name="reservationType">
+    <select id="reservationType">
       <option value="medical">Consulta médica</option>
       <option value="dental">Consulta dental</option>
     </select>
     <br />
-    <button type="submit">Actualizar</button>
+    <button type="button" onclick="callAPI(document.getElementById('reservationId').value,document.getElementById('details').value,document.getElementById('reservationDate').value,document.getElementById('reservationTime').value,document.getElementById('reservationType').value)">Actualizar</button>
   </form>
   <br />
   <a href="index.html">Volver al inicio</a>
