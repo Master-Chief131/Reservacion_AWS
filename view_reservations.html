@@ -6,13 +6,20 @@
   <title>Ver Reservaciones</title>
   <script>
     var fetchReservations = () => {
+      console.log("Fetching reservations...");
       var requestOptions = {
         method: 'GET',
         redirect: 'follow'
       };
 
       fetch("https://y30z07fx9l.execute-api.us-west-2.amazonaws.com/Semestral", requestOptions)
-        .then(response => response.json())
+        .then(response => {
+          console.log("Response received:", response);
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();
+        })
         .then(result => {
           console.log("API response:", result);
           var reservationList = document.getElementById('reservationList');
@@ -23,7 +30,11 @@
             reservationList.appendChild(li);
           });
         })
-        .catch(error => console.log("error", error));
+        .catch(error => {
+          console.log("Fetch error:", error);
+          var reservationList = document.getElementById('reservationList');
+          reservationList.innerHTML = '<li>Error al cargar las reservaciones.</li>';
+        });
     };
 
     window.onload = fetchReservations;
