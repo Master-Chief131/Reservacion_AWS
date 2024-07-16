@@ -22,12 +22,16 @@
         })
         .then(result => {
           console.log("API response:", result);
-          if (!Array.isArray(result)) {
-            throw new Error('Expected an array but received: ' + JSON.stringify(result));
+          if (!result.body) {
+            throw new Error('Expected a body property in the response');
+          }
+          let reservations = JSON.parse(result.body);
+          if (!Array.isArray(reservations)) {
+            throw new Error('Expected an array but received: ' + JSON.stringify(reservations));
           }
           var reservationList = document.getElementById('reservationList');
           reservationList.innerHTML = '';
-          result.forEach(reservation => {
+          reservations.forEach(reservation => {
             var li = document.createElement('li');
             li.innerText = `ID: ${reservation.reservationId}, Detalles: ${reservation.details}, Fecha y Hora: ${reservation.reservationTime}, Tipo: ${reservation.reservationType}`;
             reservationList.appendChild(li);
