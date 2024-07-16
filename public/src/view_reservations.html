@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ver Reservaciones</title>
+  <link rel="stylesheet" href="styles/reservation.css">
+  <link rel="stylesheet" href="styles/view_reservatons.css">
   <script>
     var fetchReservations = () => {
       console.log("Fetching reservations...");
@@ -29,18 +31,16 @@
           if (!Array.isArray(reservations)) {
             throw new Error('Expected an array but received: ' + JSON.stringify(reservations));
           }
-          var reservationList = document.getElementById('reservationList');
-          reservationList.innerHTML = '';
+          var reservationTable = document.getElementById('reservationTable');
           reservations.forEach(reservation => {
-            var li = document.createElement('li');
-            li.innerText = `ID: ${reservation.reservationId}, Detalles: ${reservation.details}, Fecha y Hora: ${reservation.reservationTime}, Tipo: ${reservation.reservationType}`;
-            reservationList.appendChild(li);
+            var row = reservationTable.insertRow();
+            row.innerHTML = `<td>${reservation.reservationId}</td><td>${reservation.details}</td><td>${reservation.reservationTime}</td><td>${reservation.reservationType}</td>`;
           });
         })
         .catch(error => {
           console.log("Fetch error:", error);
-          var reservationList = document.getElementById('reservationList');
-          reservationList.innerHTML = '<li>Error al cargar las reservaciones.</li>';
+          var reservationTable = document.getElementById('reservationTable');
+          reservationTable.innerHTML = '<tr><td colspan="4">Error al cargar las reservaciones.</td></tr>';
         });
     };
 
@@ -49,7 +49,19 @@
 </head>
 <body>
   <h2>Lista de Reservaciones</h2>
-  <ul id="reservationList"></ul>
+  <table id="reservationTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Detalles</th>
+        <th>Fecha y Hora</th>
+        <th>Tipo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Filas de la tabla se agregarán dinámicamente aquí -->
+    </tbody>
+  </table>
   <br />
   <a href="/index.html">Volver al inicio</a>
 </body>

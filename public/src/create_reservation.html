@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Web site created using create-react-app" />
   <title>Reservaciones App</title>
+  <link rel="stylesheet" href="styles/reservation.css">
   <script>
     var callAPI = (details, reservationDate, reservationTime, reservationType) => {
       console.log("Sending data:", details, reservationTime, reservationType);
@@ -54,29 +55,32 @@
 </head>
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <h2>Formulario de reservación</h2>
-  <form>
-    <label>Detalles:</label>
-    <input type="text" id="details" />
+  <div class="content">
+    <div class="container">
+      <h2>Formulario de reservación</h2>
+      <form>
+        <label>Detalles:</label>
+        <input type="text" id="details" />
+        <br />
+        <label>Fecha de reservación:</label>
+        <input type="date" id="reservationDate" />
+        <br />
+        <label>Hora de reservación:</label>
+        <input type="time" id="reservationTime" />
+        <br />
+        <label>Tipo de reserva:</label>
+        <select id="reservationType">
+          <option value="medical">Consulta médica</option>
+          <option value="dental">Consulta dental</option>
+          <!-- Agrega más opciones según sea necesario -->
+        </select>
+        <br />
+        <button type="button" onclick="callAPI(document.getElementById('details').value,document.getElementById('reservationDate').value,document.getElementById('reservationTime').value,document.getElementById('reservationType').value)">Enviar</button>
+        <br />
+      </form>
+    </div>
     <br />
-    <label>Fecha de reservación:</label>
-    <input type="date" id="reservationDate" />
-    <br />
-    <label>Hora de reservación:</label>
-    <input type="time" id="reservationTime" />
-    <br />
-    <label>Tipo de reserva:</label>
-    <select id="reservationType">
-      <option value="medical">Consulta médica</option>
-      <option value="dental">Consulta dental</option>
-      <!-- Agrega más opciones según sea necesario -->
-    </select>
-    <br />
-    <button type="button" onclick="callAPI(document.getElementById('details').value,document.getElementById('reservationDate').value,document.getElementById('reservationTime').value,document.getElementById('reservationType').value)">Enviar</button>
-    <br />
-  </form>
-  <br />
-  <a href="/index.html">Volver al inicio</a>
+    <a href="/index.html">Volver al inicio</a>
+  </div>
 </body>
 </html>
