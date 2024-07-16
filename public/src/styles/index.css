@@ -1,0 +1,96 @@
+/* styles.css */
+@import url("https://fonts.googleapis.com/css?family=Galada&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background:#000 url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghj9bINwCLBHb0eisbsNyPta830j-lSGy4cxwQnPh2D7G5VW6meZHUR8pBe_FeU-IlijZx23mDRFoBk_BkS5cma2urzcwJYMsWepbzT_1KfppJMQLfe_Uio4al0zMDPqxWNOyNByDPCdg/s1600/estrellas.png) repeat top center;
+  }
+
+  .content{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background:transparent url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhb_g8J7zQ1NSrzDIvootgPmtS9ivyjNQcAK1vhkReSLqVfyVYx-2v_Z4f5IV9LvFXGToZauTFFTYCXb5nLSVPAKZkG6ox8slt6hPqK0f6xck9jjnZa1vPSYCWLOf272Ezj7SmMgA5PTWQ/s1600/twinkling.png) repeat top center;
+    /* z-index:-2; */
+
+    -moz-animation:move-twink-back 100s linear infinite;
+    -ms-animation:move-twink-back 100s linear infinite;
+    -o-animation:move-twink-back 100s linear infinite;
+    -webkit-animation:move-twink-back 100s linear infinite;
+    animation:move-twink-back 100s linear infinite;
+  }
+
+  @keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+  }
+    @-webkit-keyframes move-twink-back {
+        from {background-position:0 0;}
+        to {background-position:-10000px 5000px;}
+  }
+    @-moz-keyframes move-twink-back {
+        from {background-position:0 0;}
+        to {background-position:-10000px 5000px;}
+  }
+    @-ms-keyframes move-twink-back {
+        from {background-position:0 0;}
+        to {background-position:-10000px 5000px;}
+  }
+  
+  .container {
+    z-index: 10;
+  }
+
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 20px;
+  }
+  
+  nav {
+    background-color: #2c3e50;
+    padding: 10px 0;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin: 0 15px;
+  }
+  
+  nav ul li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+  }
+  
+  nav ul li a:hover {
+    background-color: #34495e;
+    border-radius: 5px;
+  }
+  
