@@ -22,6 +22,9 @@
         })
         .then(result => {
           console.log("API response:", result);
+          if (!Array.isArray(result)) {
+            throw new Error('Expected an array but received: ' + JSON.stringify(result));
+          }
           var reservationList = document.getElementById('reservationList');
           reservationList.innerHTML = '';
           result.forEach(reservation => {
