@@ -5,11 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Borrar Reservación</title>
   <script>
-    var deleteReservation = (reservationId) => {
+    var deleteReservation = (userId, reservationId) => {
       console.log("Deleting reservation:", reservationId);
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        "userId": userId,
+        "reservationId": reservationId
+      });
 
       var requestOptions = {
         method: 'DELETE',
+        headers: myHeaders,
+        body: raw,
         redirect: 'follow'
       };
 
@@ -21,21 +31,18 @@
         })
         .catch(error => console.log("error", error));
     };
-
-    function handleSubmit(event) {
-      event.preventDefault();
-      var reservationId = document.getElementById('reservationId').value;
-      deleteReservation(reservationId);
-    }
   </script>
 </head>
 <body>
   <h2>Borrar Reservación</h2>
-  <form onsubmit="handleSubmit(event)">
+  <form>
+    <label>ID de Usuario:</label>
+    <input type="text" id="usuerId" />
+    <br />
     <label>ID de Reservación:</label>
     <input type="text" id="reservationId" />
     <br />
-    <button type="submit">Borrar</button>
+    <button type="button" onclick="deleteReservation(document.getElementById('usuerId').value,document.getElementById('reservationId').value)">Borrar</button>
   </form>
   <br />
   <a href="index.html">Volver al inicio</a>
